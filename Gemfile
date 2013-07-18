@@ -55,6 +55,7 @@ group :test do
   gem 'wdm'
   gem 'guard-spork'
   gem 'spork'
+  gem 'factory_girl_rails'
 end
 
 group :production do
