@@ -78,11 +78,6 @@ describe User do
     it { expect(@user).not_to be_valid}
   end
   
-  describe '#password_confirmation がnilの場合：' do
-    before { @user.password_confirmation = nil }
-    it { expect(@user).not_to be_valid }
-  end
-  
   describe '#authenticate の検証：' do
     before { @user.save }
     let(:found_user) { User.find_by_email(@user.email) }
