@@ -59,6 +59,15 @@ describe User do
     end
     it { expect(@user).not_to be_valid }
   end
+  describe '#email が大文字小文字混在する場合：' do
+    let(:mixed_case_email) { 'Foo@ExAMPle.CoM' }
+    
+    it '保存後に、全て小文字になっていること' do
+      @user.email = mixed_case_email
+      @user.save
+      expect(@user.reload.email).to eq mixed_case_email.downcase
+    end
+  end
   
   describe '#password が空白の場合：' do
     before { @user.password = @user.password_confirmation = ' ' }
