@@ -38,6 +38,14 @@ describe "User pages" do
       it "ユーザが作成されること" do
         expect { click_button submit }.to change(User, :count)
       end
+      
+      describe "submitクリック後のユーザ詳細画面：" do
+        before { click_button submit }
+        let(:user) { User.find_by_email("user@example.com")}
+        
+        it { expect(page).to have_title(user.name) }
+        it { expect(page).to have_selector('div.alert.alert-success', text: 'Welcome') }
+      end
     end
   end
   
