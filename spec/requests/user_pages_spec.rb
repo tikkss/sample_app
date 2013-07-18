@@ -18,6 +18,13 @@ describe "User pages" do
       it "ユーザが作成されないこと" do
         expect { click_button submit }.not_to change(User, :count)
       end
+      
+      describe "submitクリック後のエラー画面：" do
+        before { click_button submit }
+        
+        it { expect(page).to have_selector('h1', text: 'Sign up') }
+        it { expect(page).to have_content('error') }
+      end
     end
     
     describe "入力情報が正常な場合：" do
