@@ -20,6 +20,7 @@ describe User do
   it { expect(@user).to respond_to(:password_digest) }
   it { expect(@user).to respond_to(:password) }
   it { expect(@user).to respond_to(:password_confirmation) }
+  it { expect(@user).to respond_to(:remember_token) }
   it { expect(@user).to respond_to(:authenticate) }
   
   it { expect(@user).to be_valid }
@@ -91,5 +92,10 @@ describe User do
       it { expect(@user).not_to eq user_for_invalid_password }
       specify { expect(user_for_invalid_password).to be_false }
     end
+  end
+  
+  describe "remember token" do
+    before { @user.save }
+    it { expect(@user.remember_token).not_to be_blank }
   end
 end

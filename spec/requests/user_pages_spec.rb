@@ -45,6 +45,7 @@ describe "User pages" do
         
         it { expect(page).to have_title(user.name) }
         it { expect(page).to have_selector('div.alert.alert-success', text: 'Welcome') }
+        it { expect(page).to have_link('Sign out') }
       end
     end
   end
