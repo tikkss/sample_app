@@ -21,9 +21,11 @@ describe User do
   it { expect(@user).to respond_to(:password) }
   it { expect(@user).to respond_to(:password_confirmation) }
   it { expect(@user).to respond_to(:remember_token) }
+  it { expect(@user).to respond_to(:admin) }
   it { expect(@user).to respond_to(:authenticate) }
   
   it { expect(@user).to be_valid }
+  it { expect(@user).not_to be_admin }
   
   describe '#name が空白の場合：' do
     before { @user.name = " " }
@@ -97,5 +99,14 @@ describe User do
   describe "remember token" do
     before { @user.save }
     it { expect(@user.remember_token).not_to be_blank }
+  end
+  
+  describe "with admin attribute set to 'true'" do
+    before do
+      @user.save!
+      @user.toggle!(:admin)
+    end
+    
+    it { expect(@user).to be_admin }
   end
 end
